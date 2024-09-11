@@ -147,7 +147,7 @@ namespace MGL.CoreMath
     {
 #if SIMD
       var v4 = new Vector4f (v.x, v.y, 0f, 0f) / new Vector4f (divider);
-			return new Vector2 (v4.X, v4.Y);
+			return new Vector2D (v4.X, v4.Y);
 #else
       return new Vector2D (v.x / divider, v.y / divider);
 #endif
@@ -169,7 +169,7 @@ namespace MGL.CoreMath
     {
 #if SIMD
       var v4 = new Vector4f (v1.x, v1.y, 0f, 0f) / new Vector4f (v2.x, v2.y, 0f, 0f);
-      return new Vector2 (v4.X, v4.Y);
+      return new Vector2D (v4.X, v4.Y);
 #else
       return new Vector2D (v1.x / v2.x, v1.y / v2.x);
 #endif
@@ -219,10 +219,84 @@ namespace MGL.CoreMath
 
     #endregion
 
+    #region Oprs Overload
+
+    public static Vector2D operator + (Vector2D v1, Vector2D v2)
+    {
+      return new Vector2D (v1.x + v2.x, v1.y + v2.y);
+    }
+
+    public static Vector2D operator / (Vector2D v1, float divider)
+    {
+#if SIMD
+			var v4 = new Vector4f (v1.x, v1.y, 0f, 0f) / new Vector4f (divider);
+			return new Vector2D (v4.X, v4.Y);
+#else
+			return new Vector2D (v1.x / divider, v1.y / divider);
+#endif
+    }
+
+    public static Vector2D operator / (Vector2D v1, Vector2D v2)
+		{
+#if SIMD
+			var v4 = new Vector4f (v1.x, v1.y, 0f, 0f) / new Vector4f (v2.x, v2.y, 0f, 0f);
+			return new Vector2D (v4.X, v4.Y);
+#else
+			return new Vector2D (v1.x / v2.x, v1.y / v2.y);
+#endif
+		}
+
+		public static Vector2D operator - (Vector2D v1, Vector2D v2)
+		{
+			return new Vector2D (v1.x - v2.x, v1.y - v2.y);
+		}
+		
+		public static Vector2D operator - (Vector2D v)
+		{
+			return new Vector2D (- v.x, - v.y);
+		}
+
+    public static Vector2D operator * (Vector2D v1, Vector2D v2)
+		{
+#if SIMD
+			var v4 = new Vector4f (v1.x, v1.y, 0f, 0f) * new Vector4f (v2.x, v2.y, 0f, 0f);
+			return new Vector2D (v4.X, v4.Y);
+#else
+			return new Vector2D (v1.x * v2.x, v1.y * v2.y);
+#endif
+		}
+		
+		public static Vector2D operator * (Vector2D v, float scaleFactor)
+		{
+#if SIMD
+			var v4 = new Vector4f (v.x, v.y, 0f, 0f) * new Vector4f (scaleFactor);
+			return new Vector2D (v4.X, v4.Y);	
+#else
+			return new Vector2D (v.x * scaleFactor, v.y * scaleFactor);
+#endif
+		}
+		
+		public static Vector2D operator * (float scaleFactor, Vector2D v)
+		{
+#if SIMD
+			var v4 = new Vector4f (v.x, v.y, 0f, 0f) * new Vector4f (scaleFactor);
+			return new Vector2D (v4.X, v4.Y);	
+#else
+			return new Vector2D (v.x * scaleFactor, v.y * scaleFactor);
+#endif
+		}
+
+    #endregion
+
+
+    #region To String
+
     public override string ToString ()
 		{
 			return string.Format ("{{X:{0} Y:{1}}}", X, Y);
 		}
+
+    #endregion
 
   }
 }
