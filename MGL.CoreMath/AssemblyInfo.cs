@@ -11,11 +11,11 @@ using System.Runtime.CompilerServices;
 
 #if SIMD
 /// https://github.com/dotnet/docs/blob/main/docs/standard/simd.md
-[assembly: AssemblyDescription ("Mono Math for Games (SIMD)")]
+[assembly: AssemblyDescription ("Core Math for Games (SIMD)")]
 #elif UNSAFE
-[assembly: AssemblyDescription ("Mono Math for Games (Unsafe)")]
+[assembly: AssemblyDescription ("Core Math for Games (Unsafe)")]
 #elif SAFE
-[assembly: AssemblyDescription ("Mono Math for Games (Safe)")]
+[assembly: AssemblyDescription ("Core Math for Games (Safe)")]
 #else
-[assembly: AssemblyDescription ("Mono Math for Games (Unknown)")]
+[assembly: AssemblyDescription ("Core Math for Games (Unknown)")]
 #endif
