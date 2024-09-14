@@ -359,6 +359,64 @@ namespace MGL.CoreMath
       return (float) System.Math.Sqrt (LengthSquared ());
     }
 
+    public static void Max (ref Vector2D val1, ref Vector2D val2, out Vector2D res)   
+    {
+      res.x = System.Math.Max (val1.x, val2.x);
+      res.y = System.Math.Max (val1.y, val2.y);
+    }
+
+    public static Vector2D Max (Vector2D val1, Vector2D val2)
+    {
+      Max (ref val1, ref val2, out val1);
+      return val1;
+    }
+
+    public static void Min (ref Vector2D val1, ref Vector2D val2, out Vector2D res)   
+    {
+      res.x = System.Math.Min (val1.x, val2.x);
+      res.y = System.Math.Min (val1.y, val2.y);
+    }
+
+    public static Vector2D Min (Vector2D val1, Vector2D val2)
+    {
+      Min (ref val1, ref val2, out val1);
+      return val1;
+    }
+
+    public static void Normalize (ref Vector2D val, out Vector2D res)
+    {
+      var l = val.Length();
+      res.x = val.x / l;
+      res.y = val.y / l;
+    }
+
+    public void Normalize ()
+    {
+      Normalize (ref this, out this);
+    }
+    public static Vector2D Normalize (Vector2D val)
+    {
+      val.Normalize ();
+      return val;
+    }
+
+    public static void Reflect (ref Vector2D vec, ref Vector2D normal, out Vector2D res)
+    {
+      float d2 = (float) System.Math.Sqrt (normal.x * vec.x + normal.y * vec.y);
+      d2 += d2;
+      //subtract faster than negate and add
+      res.x = d2 * normal.x - vec.x;
+      res.y = d2 * normal.y - vec.y;
+    }
+
+    public static Vector2D Reflect (Vector2D vec, Vector2D normal)
+    {
+      Vector2D res;
+      Reflect (ref vec, ref normal, out res);
+      return res;
+    }
+
+
     #endregion
     
     #region To String
